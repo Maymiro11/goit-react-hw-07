@@ -2,17 +2,11 @@ import css from './Contact.module.css';
 import { FaUser } from 'react-icons/fa';
 import { FaPhone } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
+import { deleteContact } from '../../redux/contactsOps';
 
-const Contact = ({ contact: { id, name, phone }, setter }) => {
+const Contact = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
-
-  const handleDeleteContact = () => {
-    dispatch(deleteContact(id));
-    setter('');
-  };
 
   return (
     <div className={css.contact}>
@@ -23,23 +17,20 @@ const Contact = ({ contact: { id, name, phone }, setter }) => {
         </div>
         <div className={css.contactInfo}>
           <FaPhone className={css.contactIcon} />
-          <p className={css.phone}>{phone}</p>
+          <p className={css.phone}>{number}</p>
         </div>
       </div>
       <button
         className={css.button}
         type="button"
-        onClick={handleDeleteContact}
+        onClick={() => {
+          dispatch(deleteContact(id));
+        }}
       >
         <MdDeleteForever className={css.icon} />
       </button>
     </div>
   );
-};
-
-Contact.propTypes = {
-  contact: PropTypes.object.isRequired,
-  setter: PropTypes.func.isRequired,
 };
 
 export default Contact;
