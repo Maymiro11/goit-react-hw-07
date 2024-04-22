@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectError, selectFilteredContacts, selectLoading } from '../../redux/selectors';
-import css from '../ContactList';
+import css from './ContactList.module.css';
 import Loader from '../Loader/Loader';
 import Contact from '../Contact/Contact';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
